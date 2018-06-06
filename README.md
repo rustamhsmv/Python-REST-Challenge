@@ -28,6 +28,6 @@ $ curl -H "Content-Type: application/json" http://0.0.0.0:9001/ids/lastname/Robi
 
 ### How to expand this application in the future
   - To scale this for more people data, 
-    - Data should be persisted in DB table. Age and Last Name columns should be indexed for faster seeks. Cassandra should serve the purpose. If record deduplication required, table's partition key should be combination of unique columns (or hash of combination).
+    - Data should be persisted in DB table. Age and Last Name columns should be indexed for faster seeks. Cassandra should serve the purpose. If record deduplication required, table's partition key should be combination of unique columns (or hash of combination). Integer and date columns should be stored as they are instead of in string format. 
     - A cache (LRU or LFU depends on usage) should be tried to avoid I/O in '/ids/lastname/' queries.
     - '/people/age' response should be paged by changing API to '/people/age?offset=N' and return only K at a time.. This will prevent reading all people data into memory.
