@@ -1,16 +1,23 @@
+## Installation
+- Install [Flask](https://github.com/pallets/flask#installing)
+- Setup and activate [virtual envirnoment](https://packaging.python.org/guides/installing-using-pip-and-virtualenv/#installing-virtualenv)
+- Install [curl](https://curl.haxx.se/download.html) to call server from command line (optional)
 
-# Instructions
-Fork this repository and submit a url to the forked repository with your solution.
-Please provide documentation in this README explaining the following:
-- How to run including any configuration needed
-- Any thoughts on how to expand this application in the future
-- What you have covered or not covered.
+## Configuration
+If running on development server, set environment flag:
+```
+$ export FLASK_ENV=development
+````
 
-## General instructions and tasks
-Read and pull in data from people.csv.
-Fill in the requests in server.py where TODOs are stated in the comments.
-Get as many done as you can.
-If you have time create unit tests.
-Feel free to add other systems to the application.
-Also feel free to submit issues on this public branch with questions if you have any.
+## Running
+Check the usage:
+```sh
+$ python3 server.py -h
+```
 
+### A simple example
+```sh
+$ python3 server.py 9001 people.csv -d
+$ curl -H "Content-Type: application/json" http://0.0.0.0:9001/ids/lastname/Robiner
+["3", "6", "7"]
+```
