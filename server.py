@@ -1,7 +1,6 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import argparse
 import csv
-import json
 import sys
 
 #Web app
@@ -23,7 +22,7 @@ def getPeople():
     '''
     Return a standard JSON block of people in any order of format. Must be valid JSON
     '''
-    return json.dumps(people)
+    return jsonify(people)
 
 @app.route('/people/age',methods=['GET'])
 def sortPeopleByAge():
@@ -36,7 +35,7 @@ def sortPeopleByAge():
         key=lambda person: int(person[age_index]) if person[age_index] != "" else float("inf")
     )
 
-    return json.dumps(sortedList)
+    return jsonify(sortedList)
 
 @app.route('/ids/lastname/<lastname>',methods=['GET'])
 def getIdsByLastName(lastname):
@@ -48,7 +47,7 @@ def getIdsByLastName(lastname):
     last_name_index = keys_to_index.get("Last")
     ids = [person[id_index] for person in people if person[last_name_index].lower() == lastname.lower()]
 
-    return json.dumps(ids)
+    return jsonify(ids)
 
 @app.route('/people/add', methods=['POST'])
 def addPerson():
@@ -71,7 +70,7 @@ def addPerson():
         writer = csv.writer(file_d)
         writer.writerow(person)
 
-    return json.dumps(people)
+    return jsonify(people)
 
 
 if __name__ == '__main__':
